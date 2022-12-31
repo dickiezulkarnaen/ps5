@@ -14,10 +14,14 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final _scrollController = ScrollController();
+  late final MainBloc _bloc;
 
   @override
   void initState() {
-    context.read<MainBloc>().add(FetchingEvent());
+    _bloc = context.read<MainBloc>();
+    _bloc.add(FetchEvent());
+    _scrollController.addListener(_onScroll);
     super.initState();
   }
 
@@ -29,47 +33,81 @@ class _MainPageState extends State<MainPage> {
       ),
       body: Center(
         child: BlocBuilder<MainBloc, MainState>(
-          bloc: context.read<MainBloc>(),
+          bloc: _bloc,
           builder: (ctx, state) {
-            if (state is LoadedMainState) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: state.games.length,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: ListView.separated(
+                      controller: _scrollController,
+                      itemCount: _bloc.hasMorePage ? _bloc.games.length + 1 : _bloc.games.length,
                       shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
                       separatorBuilder: (context, index) => const Divider(),
-                      itemBuilder: (context, index) => ListTile(
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: CachedNetworkImage(
-                            imageUrl: state.games[index]?.backgroundImage ?? '',
-                            width: 100,
-                            height: 65,
-                          ),
-                        ),
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('${state.games[index]?.name}', style: const TextStyle(fontWeight: FontWeight.bold),),
-                            const SizedBox(height: 5,),
-                            Text('${state.games[index]?.released}', style: const TextStyle(fontSize: 14),),
-                            Text('${state.games[index]?.metacritic ?? '-'}', style: const TextStyle(fontSize: 14),),
-                          ],
-                        )
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return Container();
-            }
+                      itemBuilder: (context, index) => index < _bloc.games.length
+                          ? ListTile(
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: CachedNetworkImage(
+                                  imageUrl: _bloc.games[index].backgroundImage ?? '',
+                                  fit: BoxFit.fill,
+                                  errorWidget: (ctx, s, d) => Image.asset('assets/images/games.png'),
+                                  width: 100,
+                                  height: 65,
+                                ),
+                              ),
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${_bloc.games[index].name}',
+                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '${_bloc.games[index].released}',
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                  Text(
+                                    '${_bloc.games[index].metacritic ?? '-'}',
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ],
+                              ))
+                          : const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(5.0),
+                                child: SizedBox(
+                                  width: 25,
+                                  height: 25,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            )),
+                ),
+              ],
+            );
           },
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_onScroll)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.position.pixels;
+    if (currentScroll == maxScroll && _bloc.hasMorePage && _bloc.state is! FetchMoreEvent) _bloc.add(FetchMoreEvent());
   }
 }

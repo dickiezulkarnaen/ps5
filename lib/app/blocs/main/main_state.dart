@@ -11,4 +11,7 @@ class LoadedMainState extends MainState {
   LoadedMainState(this.games);
 }
 
-class ErrorMainState extends MainState {}
+class ErrorMainState extends MainState {
+  final String? message;
+  ErrorMainState(this.message);
+}

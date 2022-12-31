@@ -1,4 +1,6 @@
 
 class MainEvent {}
 
-class FetchingEvent extends MainEvent {}
+class FetchEvent extends MainEvent {}
+
+class FetchMoreEvent extends MainEvent {}
