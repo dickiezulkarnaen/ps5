@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_event.dart';
@@ -22,12 +20,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   final games = <Results>[];
 
   Future<void> _getPlaystation5Games(Emitter<MainState> emitter) async {
-    emitter(LoadingMainState());
-    final current = DateTime.now();
-    final currentFormatted = current.toFormattedString(format: usedDateFormat);
-    final oneYearBeforeNow = _getOneYearBefore(currentDate: current).toFormattedString(format: usedDateFormat);
-    final dates = '$currentFormatted-$oneYearBeforeNow';
-    final res = await _repo.getPlaystation5Games(_page, 20, dates,);
+    final res = await _repo.getPlaystation5Games(_page, 20, _getDatesParam(),);
     if (res.isSuccessful) {
       final data = GamesResponse.fromJson(res.result);
       hasMorePage = data.next != null;
@@ -36,6 +29,13 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     } else {
       emitter(ErrorMainState(res.message));
     }
+  }
+
+  String _getDatesParam() {
+    final current = DateTime.now();
+    final currentFormatted = current.toFormattedString(format: usedDateFormat);
+    final oneYearBeforeNow = _getOneYearBefore(currentDate: current).toFormattedString(format: usedDateFormat);
+    return '$currentFormatted-$oneYearBeforeNow';
   }
 
   DateTime _getOneYearBefore({required DateTime currentDate}) {
@@ -50,13 +50,15 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
   Future<void> _onInitialFetch(Emitter<MainState> emitter) async {
     _resetPage();
+    emitter(LoadingMainState());
     await _getPlaystation5Games(emitter);
   }
 
-  Future<void> _onFetchingNextPage(Emitter<MainState> emit) async {
+  Future<void> _onFetchingNextPage(Emitter<MainState> emitter) async {
     if (hasMorePage) {
       _page++;
-      await _getPlaystation5Games(emit);
+      emitter(LoadingMoreMainState());
+      await _getPlaystation5Games(emitter);
     }
   }
 
