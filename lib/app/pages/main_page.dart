@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_bloc.dart';
 import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_event.dart';
+import 'package:ps5_dicky_iskandar_z/app/pages/detail_page.dart';
 
 import '../blocs/main/main_state.dart';
 
@@ -79,7 +80,7 @@ class _MainPageState extends State<MainPage> {
                                       style: const TextStyle(fontSize: 14),
                                     ),
                                     RatingBar.builder(
-                                      initialRating: _bloc.games[index].rating ?? 0.0,
+                                      initialRating: _bloc.games[index].rating ?? 0,
                                       minRating: 1,
                                       direction: Axis.horizontal,
                                       allowHalfRating: true,
@@ -106,6 +107,9 @@ class _MainPageState extends State<MainPage> {
                                         ),
                                       )
                                     : const SizedBox(width: 0,),
+                                onTap: () {
+                                  DetailPage.route(context, _bloc.games[index].id);
+                                },
                               )
                             : const Center(
                                 child: Padding(

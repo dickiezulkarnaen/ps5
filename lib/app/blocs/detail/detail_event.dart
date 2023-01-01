@@ -1,7 +1,13 @@
-/***
- * Author         : Dicky Zulkarnain
- * Date           : 30/12/22
- * Original File  : detail_event
- ***/
+
 
 class DetailEvent {}
+
+class GetDetailEvent extends DetailEvent {
+  final int id;
+  GetDetailEvent(this.id);
+}
+
+class GetScreenShotsEvent extends DetailEvent {
+  final int id;
+  GetScreenShotsEvent(this.id);
+}

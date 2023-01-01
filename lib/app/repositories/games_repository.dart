@@ -17,4 +17,12 @@ class GamesRepository extends BaseRepository {
     return api.get(path: 'games', params: params);
   }
 
+  Future<Completion> getGameDetail(int gameId) {
+    return api.get(path: 'games/$gameId', params: {'key': ApiConstant.rawgApiKey});
+  }
+
+  Future<Completion> getGameScreenShots(int gamePK) {
+    return api.get(path: 'games/$gamePK/screenshots', params: {'key': ApiConstant.rawgApiKey});
+  }
+
 }
