@@ -20,16 +20,16 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> {
 
   final _pageController = PageController();
 
-  var firstOpen = true;
+  bool _firstOpen = true;
 
-  late final List<String> items;
-  var selectedIndex = 0;
+  late final List<String> _items;
+  int selectedIndex = 0;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (firstOpen) {
-        firstOpen = false;
+      if (_firstOpen) {
+        _firstOpen = false;
         _pageController.jumpToPage(selectedIndex);
       }
     });
@@ -39,7 +39,7 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> {
   @override
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    items = arguments['items'];
+    _items = arguments['items'];
     selectedIndex = arguments['index'];
     return Material(
       child: Stack(
@@ -48,13 +48,13 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> {
           scrollPhysics: const BouncingScrollPhysics(),
           builder: (BuildContext context, int index) {
             return PhotoViewGalleryPageOptions(
-              imageProvider: CachedNetworkImageProvider(items[index]),
+              imageProvider: CachedNetworkImageProvider(_items[index]),
               initialScale: PhotoViewComputedScale.contained * 1,
-              heroAttributes: PhotoViewHeroAttributes(tag: items[index]),
+              heroAttributes: PhotoViewHeroAttributes(tag: _items[index]),
             );
           },
           pageController: _pageController,
-          itemCount: items.length,
+          itemCount: _items.length,
           loadingBuilder: (context, event) => Center(
             child: SizedBox(
               width: 20.0,
