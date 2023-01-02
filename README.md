@@ -13,10 +13,13 @@ This project is a simple Flutter Application to display list of Playstation 5 Ga
 - run main.dart
 
 # Preview :
-![alt text](https://raw.githubusercontent.com/dickiezulkarnaen/ps5_dicky_iskandar_z/main/assets/screenshots/ss1.png?token=GHSAT0AAAAAAB42GYTT7IFWQO26OE73WQH2Y5SHYUA)
-![alt text](https://raw.githubusercontent.com/dickiezulkarnaen/ps5_dicky_iskandar_z/main/assets/screenshots/ss2.png?token=GHSAT0AAAAAAB42GYTT7IFWQO26OE73WQH2Y5SHYUA)
-![alt text](https://raw.githubusercontent.com/dickiezulkarnaen/ps5_dicky_iskandar_z/main/assets/screenshots/ss1.png?token=GHSAT0AAAAAAB42GYTT7IFWQO26OE73WQH2Y5SHYUA)
-![alt text](https://raw.githubusercontent.com/dickiezulkarnaen/ps5_dicky_iskandar_z/main/assets/screenshots/ss1.png?token=GHSAT0AAAAAAB42GYTT7IFWQO26OE73WQH2Y5SHYUA)
+![alt text](https://raw.githubusercontent.com/dickiezulkarnaen/ps5_dicky_iskandar_z/main/assets/screenshots/ss1.png?token=GHSAT0AAAAAAB42GYTSCMTOD3VUD2QNVMZ2Y5SIB7A)
+
+![alt text](https://raw.githubusercontent.com/dickiezulkarnaen/ps5_dicky_iskandar_z/main/assets/screenshots/ss2.png?token=GHSAT0AAAAAAB42GYTSPZTWYTLBUURRZQAWY5SICYQ)
+
+![alt text](https://raw.githubusercontent.com/dickiezulkarnaen/ps5_dicky_iskandar_z/main/assets/screenshots/ss3.png?token=GHSAT0AAAAAAB42GYTTCEQQEUJQBBWMI5SCY5SIC3Q)
+
+![alt text](https://raw.githubusercontent.com/dickiezulkarnaen/ps5_dicky_iskandar_z/main/assets/screenshots/ss4.png?token=GHSAT0AAAAAAB42GYTSAQZHY7FQMZSVVCHOY5SIC5A)
 
 # Tech Stack
 - Flutter
