@@ -66,7 +66,7 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> {
           onPageChanged: (i) => Logging.debug('PAGE : $i'),
         ),
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
             child: IconButton(
               onPressed: (){ Navigator.pop(context); },
               icon: const Icon(Icons.arrow_back_sharp, color: Colors.white,),),

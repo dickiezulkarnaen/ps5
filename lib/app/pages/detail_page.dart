@@ -8,6 +8,7 @@ import 'package:ps5_dicky_iskandar_z/app/blocs/detail/detail_state.dart';
 import 'package:ps5_dicky_iskandar_z/app/models/game_detail_response.dart';
 import 'package:ps5_dicky_iskandar_z/app/models/game_screen_shot_response.dart';
 import 'package:ps5_dicky_iskandar_z/app/pages/image_preview_page.dart';
+import 'package:ps5_dicky_iskandar_z/app/widgets/error_widgets.dart';
 import 'package:ps5_dicky_iskandar_z/utils/collection_util.dart';
 
 class DetailPage extends StatefulWidget {
@@ -25,6 +26,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
 
   late final DetailBloc _bloc;
+  late final int? _gameId;
 
   @override
   void initState() {
@@ -34,8 +36,8 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final gameId = ModalRoute.of(context)!.settings.arguments as int?;
-    if (gameId != null) _bloc.add(GetDetailEvent(gameId));
+    _gameId = ModalRoute.of(context)!.settings.arguments as int?;
+    if (_gameId != null) _bloc.add(GetDetailEvent(_gameId!));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Game Detail'),
@@ -54,6 +56,15 @@ class _DetailPageState extends State<DetailPage> {
                   _handleScreenShotsWidget(state),
                   const SizedBox(height: 16,),
                 ],
+              ),
+            );
+          } else if (state is ErrorDetailState) {
+            return Center(
+              child: CommonErrorWidget(
+                message: state.message ?? 'Can`t get detail game, please try again later',
+                callback: () {
+                  if (_gameId != null) _bloc.add(GetDetailEvent(_gameId!));
+                },
               ),
             );
           } else  {

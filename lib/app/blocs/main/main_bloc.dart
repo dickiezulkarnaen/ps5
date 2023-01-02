@@ -27,7 +27,11 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       data.results?.forEach((e) => games.add(e));
       emitter(LoadedMainState(games));
     } else {
-      emitter(ErrorMainState(res.message));
+      if (_page > 1) {
+        emitter(ErrorLoadingMoreMainState(res.message, games));
+      } else {
+        emitter(ErrorMainState(res.message));
+      }
     }
   }
 

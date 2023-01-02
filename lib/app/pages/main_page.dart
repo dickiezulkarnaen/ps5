@@ -5,6 +5,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_bloc.dart';
 import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_event.dart';
 import 'package:ps5_dicky_iskandar_z/app/pages/detail_page.dart';
+import 'package:ps5_dicky_iskandar_z/app/widgets/error_widgets.dart';
+import 'package:ps5_dicky_iskandar_z/utils/snack_bar_helper.dart';
 
 import '../blocs/main/main_state.dart';
 
@@ -19,6 +21,8 @@ class _MainPageState extends State<MainPage> {
   final _scrollController = ScrollController();
   late final MainBloc _bloc;
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     _bloc = context.read<MainBloc>();
@@ -30,34 +34,57 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('Playstation 5'),
       ),
       body: Center(
-        child: BlocBuilder<MainBloc, MainState>(
-          bloc: _bloc,
-          builder: (ctx, state) {
-            if (state is LoadingMainState) {
-              return const Center(child: CircularProgressIndicator(),);
-            } else {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: ListView.separated(
-                        controller: _scrollController,
-                        itemCount: _bloc.hasMorePage ? _bloc.games.length + 1 : _bloc.games.length,
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        separatorBuilder: (context, index) => const Divider(),
-                        itemBuilder: (context, index) => index < _bloc.games.length ? _gameItem(index) : _loadMoreProgress(),
-                    ),
-                  ),
-                ],
-              );
+        child: BlocListener<MainBloc, MainState>(
+          listener: (context, state) {
+            if (state is ErrorLoadingMoreMainState) {
+              _scaffoldKey.currentState?.context.showSnackBar(state.message);
             }
           },
+          child: BlocBuilder<MainBloc, MainState>(
+            bloc: _bloc,
+            builder: (ctx, state) {
+              if (state is ErrorMainState) {
+                return Center(
+                  child: CommonErrorWidget(
+                    message: state.message ?? commonErrorMessage,
+                    callback: () => _bloc.add(FetchEvent()),
+                  ),
+                );
+              } else if (state is LoadingMainState) {
+                return const Center(child: CircularProgressIndicator(),);
+              } else {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: ListView.separated(
+                          controller: _scrollController,
+                          itemCount: _bloc.hasMorePage ? _bloc.games.length + 1 : _bloc.games.length,
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          separatorBuilder: (context, index) => const Divider(),
+                          itemBuilder: (context, index) {
+                            if (index < _bloc.games.length) {
+                              return _gameItem(index);
+                            } else if (state is ErrorLoadingMoreMainState) {
+                              return Container();
+                            } else {
+                              return _loadMoreProgress();
+                            }
+                          }
+                      ),
+                    ),
+                  ],
+                );
+              }
+            },
+          ),
         ),
       ),
     );
@@ -150,4 +177,5 @@ class _MainPageState extends State<MainPage> {
     final currentScroll = _scrollController.position.pixels;
     if (currentScroll == maxScroll && _bloc.hasMorePage && _bloc.state is! FetchMoreEvent) _bloc.add(FetchMoreEvent());
   }
+
 }

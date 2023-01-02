@@ -17,6 +17,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   }
 
   Future<void> _getGameDetail(int gameId, Emitter<DetailState> emitter) async {
+    emitter(LoadingDetailState());
     final res = await _repo.getGameDetail(gameId);
     if (res.isSuccessful) {
       final data = GameDetailResponse.fromJson(res.result);

@@ -17,3 +17,8 @@ class ErrorMainState extends MainState {
   final String? message;
   ErrorMainState(this.message);
 }
+
+class ErrorLoadingMoreMainState extends LoadedMainState {
+  final String? message;
+  ErrorLoadingMoreMainState(this.message, List<Results?> games) : super(games);
+}
