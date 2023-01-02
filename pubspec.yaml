@@ -1,7 +1,7 @@
 name: ps5_dicky_iskandar_z
-description: A new Flutter project.
+description: Playstastion 5 Games List.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -16,9 +16,7 @@ dependencies:
   get_it: ^7.2.0
   dio: ^4.0.6
   flutter_bloc:
-  flutter_svg: "^1.0.3"
   logger: ^1.1.0
-  connectivity_plus: ^3.0.2
   cached_network_image: ^3.2.3
   intl: ^0.18.0
   flutter_rating_bar: ^4.0.1

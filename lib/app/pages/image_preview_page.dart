@@ -23,14 +23,14 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> {
   bool _firstOpen = true;
 
   late final List<String> _items;
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (_firstOpen) {
         _firstOpen = false;
-        _pageController.jumpToPage(selectedIndex);
+        _pageController.jumpToPage(_selectedIndex);
       }
     });
     super.initState();
@@ -40,9 +40,10 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> {
   Widget build(BuildContext context) {
     final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     _items = arguments['items'];
-    selectedIndex = arguments['index'];
-    return Material(
-      child: Stack(
+    _selectedIndex = arguments['index'];
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
         children: [
           PhotoViewGallery.builder(
           scrollPhysics: const BouncingScrollPhysics(),
@@ -55,15 +56,11 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> {
           },
           pageController: _pageController,
           itemCount: _items.length,
-          loadingBuilder: (context, event) => Center(
+          loadingBuilder: (context, event) => const Center(
             child: SizedBox(
               width: 20.0,
               height: 20.0,
-              child: CircularProgressIndicator(
-                value: event == null
-                    ? 0
-                    : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
-              ),
+              child: CircularProgressIndicator(),
             ),
           ),
           onPageChanged: (i) => Logging.debug('PAGE : $i'),
@@ -82,7 +79,7 @@ class _ImagePreviewPageState extends State<ImagePreviewPage> {
   Widget imageWidget(String imageUrl) {
     return PhotoView(
       enableRotation: true,
-      imageProvider: NetworkImage(imageUrl),
+      imageProvider: CachedNetworkImageProvider(imageUrl),
     );
   }
 }

@@ -46,6 +46,7 @@ class _DetailPageState extends State<DetailPage> {
           if (state is LoadedDetailState) {
             return SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _nameAndBackgroundSection(context, state.gameDetail.backgroundImage, state.gameDetail.name),
                   _releaseDateAndRatingSection(state.gameDetail.released, state.gameDetail.genres, state.gameDetail.rating),
@@ -99,35 +100,36 @@ class _DetailPageState extends State<DetailPage> {
 
   Widget _releaseDateAndRatingSection(String? date, List<Genre>? genres, double? rating) {
     final joinedGenres = genres?.map((e) => e.name).join(', ');
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(height: 10,),
-        date != null ? Text(date) : const SizedBox(height: 0,),
-        date != null ? const SizedBox(height: 5,) : const SizedBox(height: 0,),
-        joinedGenres != null ? Text(joinedGenres) : const SizedBox(height: 0,),
-        joinedGenres != null ? const SizedBox(height: 5,) : const SizedBox(height: 0,),
-        RatingBar.builder(
-          initialRating: rating ?? 0,
-          minRating: 1,
-          direction: Axis.horizontal,
-          allowHalfRating: true,
-          itemCount: 5,
-          itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-          itemBuilder: (context, _) => const Icon(
-            Icons.star,
-            color: Colors.amber,
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(height: 10,),
+          date != null ? Text(date) : const SizedBox(height: 0,),
+          date != null ? const SizedBox(height: 5,) : const SizedBox(height: 0,),
+          joinedGenres != null ? Text(joinedGenres) : const SizedBox(height: 0,),
+          joinedGenres != null ? const SizedBox(height: 5,) : const SizedBox(height: 0,),
+          RatingBar.builder(
+            initialRating: rating ?? 0,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => const Icon(
+              Icons.star,
+              color: Colors.amber,
+            ),
+            itemSize: 25.0,
+            onRatingUpdate: (rating) {},
           ),
-          itemSize: 25.0,
-          onRatingUpdate: (rating) {},
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _labelAndValueItem(String label, String? value) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10.0,),
