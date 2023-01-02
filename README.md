@@ -14,13 +14,7 @@ This project is a simple Flutter Application to display list of Playstation 5 Ga
 
 # Preview :
 
-<img src="assets/screenshots/ss1.png" width="200">
-
-<img src="assets/screenshots/ss2.png" width="200">
-
-<img src="assets/screenshots/ss3.png" width="200">
-
-<img src="assets/screenshots/ss4.png" width="200">
+<img src="assets/screenshots/ss1.png" width="200"> <img src="assets/screenshots/ss2.png" width="200"> <img src="assets/screenshots/ss3.png" width="200"> <img src="assets/screenshots/ss4.png" width="200">
 
 # Tech Stack
 - Flutter
