@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_bloc.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_event.dart';
-import 'package:ps5_dicky_iskandar_z/app/pages/detail_page.dart';
-import 'package:ps5_dicky_iskandar_z/app/widgets/error_widgets.dart';
-import 'package:ps5_dicky_iskandar_z/utils/snack_bar_helper.dart';
+import 'package:ps5/app/blocs/main/main_bloc.dart';
+import 'package:ps5/app/blocs/main/main_event.dart';
+import 'package:ps5/app/pages/detail_page.dart';
+import 'package:ps5/app/widgets/error_widgets.dart';
+import 'package:ps5/utils/snack_bar_helper.dart';
 
 import '../blocs/main/main_state.dart';
 

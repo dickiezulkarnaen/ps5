@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "500453238888",
+    "firebase_url": "https://dickiez-default-rtdb.firebaseio.com",
+    "project_id": "dickiez",
+    "storage_bucket": "dickiez.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500453238888:android:11e24f83b45473a93c33dd",
+        "android_client_info": {
+          "package_name": "com.dickiez.ps5"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500453238888-gi5e5hna2re0i4oho8ra403kmee1ecga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMKNSa3dKDEVjUUiJb7Gn5sxZkdqUYLs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500453238888-gi5e5hna2re0i4oho8ra403kmee1ecga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/detail/detail_event.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/detail/detail_state.dart';
-import 'package:ps5_dicky_iskandar_z/app/models/game_detail_response.dart';
-import 'package:ps5_dicky_iskandar_z/app/models/game_screen_shot_response.dart';
-import 'package:ps5_dicky_iskandar_z/app/repositories/games_repository.dart';
+import 'package:ps5/app/blocs/detail/detail_event.dart';
+import 'package:ps5/app/blocs/detail/detail_state.dart';
+import 'package:ps5/app/models/game_detail_response.dart';
+import 'package:ps5/app/models/game_screen_shot_response.dart';
+import 'package:ps5/app/repositories/games_repository.dart';
 
 
 class DetailBloc extends Bloc<DetailEvent, DetailState> {

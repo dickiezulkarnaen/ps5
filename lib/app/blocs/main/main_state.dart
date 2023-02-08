@@ -1,6 +1,6 @@
 
 
-import 'package:ps5_dicky_iskandar_z/app/models/games_response.dart';
+import 'package:ps5/app/models/games_response.dart';
 
 class MainState {}
 

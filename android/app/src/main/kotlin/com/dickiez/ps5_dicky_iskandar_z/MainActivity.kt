@@ -1,4 +1,4 @@
-package com.dickiez.ps5_dicky_iskandar_z
+package com.dickiez.ps5
 
 import io.flutter.embedding.android.FlutterActivity
 

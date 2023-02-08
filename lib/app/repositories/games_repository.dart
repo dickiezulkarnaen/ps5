@@ -1,7 +1,7 @@
 
-import 'package:ps5_dicky_iskandar_z/app/base/base_repository.dart';
-import 'package:ps5_dicky_iskandar_z/app/constants/constants.dart';
-import 'package:ps5_dicky_iskandar_z/core/completion.dart';
+import 'package:ps5/app/base/base_repository.dart';
+import 'package:ps5/app/constants/constants.dart';
+import 'package:ps5/core/completion.dart';
 
 class GamesRepository extends BaseRepository {
 

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:ps5_dicky_iskandar_z/utils/logger_util.dart';
+import 'package:ps5/utils/logger_util.dart';
 
 
 class ImagePreviewPage extends StatefulWidget {

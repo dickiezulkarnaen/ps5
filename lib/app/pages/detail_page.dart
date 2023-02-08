@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/detail/detail_bloc.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/detail/detail_event.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/detail/detail_state.dart';
-import 'package:ps5_dicky_iskandar_z/app/models/game_detail_response.dart';
-import 'package:ps5_dicky_iskandar_z/app/models/game_screen_shot_response.dart';
-import 'package:ps5_dicky_iskandar_z/app/pages/image_preview_page.dart';
-import 'package:ps5_dicky_iskandar_z/app/widgets/error_widgets.dart';
-import 'package:ps5_dicky_iskandar_z/utils/collection_util.dart';
+import 'package:ps5/app/blocs/detail/detail_bloc.dart';
+import 'package:ps5/app/blocs/detail/detail_event.dart';
+import 'package:ps5/app/blocs/detail/detail_state.dart';
+import 'package:ps5/app/models/game_detail_response.dart';
+import 'package:ps5/app/models/game_screen_shot_response.dart';
+import 'package:ps5/app/pages/image_preview_page.dart';
+import 'package:ps5/app/widgets/error_widgets.dart';
+import 'package:ps5/utils/collection_util.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({Key? key}) : super(key: key);

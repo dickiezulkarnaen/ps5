@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:ps5_dicky_iskandar_z/core/completion.dart';
-import 'package:ps5_dicky_iskandar_z/utils/logger_util.dart';
+import 'package:ps5/core/completion.dart';
+import 'package:ps5/utils/logger_util.dart';
 
 
 enum Method { get, post, put, delete, patch }

@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_event.dart';
-import 'package:ps5_dicky_iskandar_z/app/blocs/main/main_state.dart';
-import 'package:ps5_dicky_iskandar_z/app/models/games_response.dart';
-import 'package:ps5_dicky_iskandar_z/app/repositories/games_repository.dart';
-import 'package:ps5_dicky_iskandar_z/utils/date_util.dart';
+import 'package:ps5/app/blocs/main/main_event.dart';
+import 'package:ps5/app/blocs/main/main_state.dart';
+import 'package:ps5/app/models/games_response.dart';
+import 'package:ps5/app/repositories/games_repository.dart';
+import 'package:ps5/utils/date_util.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc() : super(LoadingMainState()) {

@@ -1,6 +1,6 @@
 
 import 'package:intl/intl.dart';
-import 'package:ps5_dicky_iskandar_z/utils/logger_util.dart';
+import 'package:ps5/utils/logger_util.dart';
 
 const String commonDateFormat = 'dd-MM-yyyy';
 

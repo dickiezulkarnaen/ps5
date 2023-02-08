@@ -1,7 +1,7 @@
 
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ps5_dicky_iskandar_z/utils/date_util.dart';
+import 'package:ps5/utils/date_util.dart';
 
 void main() {
   final date = DateTime(2022, 08, 21, 0, 0, 0, 0, 0);

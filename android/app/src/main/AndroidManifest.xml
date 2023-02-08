@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dickiez.ps5_dicky_iskandar_z">
+    package="com.dickiez.ps5">
    <application
-        android:label="ps5_dicky_iskandar_z"
+        android:label="ps5"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

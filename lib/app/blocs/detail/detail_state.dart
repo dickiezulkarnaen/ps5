@@ -1,7 +1,7 @@
 
 
-import 'package:ps5_dicky_iskandar_z/app/models/game_detail_response.dart';
-import 'package:ps5_dicky_iskandar_z/app/models/game_screen_shot_response.dart';
+import 'package:ps5/app/models/game_detail_response.dart';
+import 'package:ps5/app/models/game_screen_shot_response.dart';
 
 class DetailState {}
 

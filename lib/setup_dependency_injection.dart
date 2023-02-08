@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:ps5_dicky_iskandar_z/app/data/api/rawg_api.dart';
-import 'package:ps5_dicky_iskandar_z/app/repositories/games_repository.dart';
+import 'package:ps5/app/data/api/rawg_api.dart';
+import 'package:ps5/app/repositories/games_repository.dart';
 
 class SetupDependencyInjection {
 

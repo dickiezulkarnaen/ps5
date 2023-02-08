@@ -1,4 +1,4 @@
-# ps5_dicky_iskandar_z
+# ps5
 
 Playstastion 5 Games List
 
