@@ -1,5 +1,6 @@
-name:
-  Build And Deploy App To Firebase Distribution:
+name: Build And Deploy App To Firebase Distribution
+
+on:
   push:
     branches: [ main ]
 jobs:
