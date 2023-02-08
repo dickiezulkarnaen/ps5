@@ -13,7 +13,7 @@ jobs:
         with:
           java-version: 1.8
       - uses: subosito/flutter-action@v1
-          with:
+        with:
             flutter-version: '1.17.0'
       - run: flutter pub get
       - run: flutter test
