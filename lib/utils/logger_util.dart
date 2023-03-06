@@ -1,33 +1,24 @@
-import 'package:logger/logger.dart';
 
-class Logging extends Logger {
 
-  Logging._();
 
-  static Logging? _logging;
+import 'dart:developer';
 
-  static Logging _instance() {
-    return _logging ??= Logging._();
-  }
+import 'package:flutter/foundation.dart';
+
+class Logging {
+
+  static void init() {}
 
   static void debug(dynamic message) {
-    _instance().d(message);
+    if (kDebugMode) log(message);
   }
 
   static void warning(dynamic message) {
-    _instance().w(message);
+    if (kDebugMode) log(message);
   }
 
-  static void error(dynamic message) {
-    _instance().e(message);
-  }
-
-  static void verbose(dynamic message) {
-    _instance().v(message);
-  }
-
-  static void whatTF(dynamic message) {
-    _instance().wtf(message);
+  static void error(dynamic message, {dynamic error}) {
+    if (kDebugMode) log(message, error: error);
   }
 
 }

@@ -11,6 +11,7 @@ import 'setup_dependency_injection.dart';
 void main() {
   SetupDependencyInjection.init();
   runApp(const MyApp());
+  //Logging.init();
 }
 
 class MyApp extends StatelessWidget {

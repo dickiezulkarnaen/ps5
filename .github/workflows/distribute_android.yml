@@ -1,4 +1,4 @@
-name: Build And Deploy App To Firebase Distribution
+name: Build And Deploy Android App To Firebase Distribution
 
 on:
   push:
@@ -18,13 +18,14 @@ jobs:
           flutter-version: '3.7.0'
       - run: flutter pub get
       - run: flutter test
-      - run: flutter build apk --debug
+      - name: Build Android
+        run: flutter build apk --debug
       - name: Get apk name
         id: apk-name
         run: |
           APK_NAME=$(echo build/app/outputs/flutter-apk/*.apk)
           echo "::set-output name=APK_NAME::${APK_NAME}"
-      - name: upload artifact to Firebase App Distribution
+      - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.5.0
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
