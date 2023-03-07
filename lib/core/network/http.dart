@@ -26,8 +26,6 @@ abstract class Http {
     dio.interceptors.add(HttpInterceptor());
   }
 
-  final interceptor = Interceptor();
-
   Future<Completion> request({
     required Method method,
     required String path,
@@ -48,18 +46,11 @@ abstract class Http {
         data: body,
         options: options,
       );
-      final completion = Completion();
       final statusCode = request.statusCode ?? 500;
-      completion.isSuccessful = statusCode >= 200 && statusCode <= 300;
-      completion.message = request.statusMessage;
-      completion.result = request.data;
-      return completion;
+      final isSuccessful = statusCode >= 200 && statusCode <= 300;
+      return Completion(isSuccessful: isSuccessful, message: request.statusMessage, result: request.data);
      } on DioError catch(e) {
-      final completion = Completion();
-      completion.isSuccessful = false;
-      completion.message = e.response?.statusMessage;
-      completion.result = e.response?.data;
-      return completion;
+      return Completion(isSuccessful: false, message: e.response?.statusMessage, result: e.response?.data);
      }
   }
 
