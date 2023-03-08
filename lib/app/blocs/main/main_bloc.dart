@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:ps5/app/blocs/main/main_event.dart';
 import 'package:ps5/app/blocs/main/main_state.dart';
 import 'package:ps5/app/models/games_response.dart';
+import 'package:ps5/app/repositories/auth_repository_usecase.dart';
 import 'package:ps5/app/repositories/games_repository.dart';
 import 'package:ps5/utils/date_util.dart';
 
@@ -10,9 +11,11 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc() : super(LoadingMainState()) {
     on<FetchEvent>((event, emit) async => _onInitialFetch(emit));
     on<FetchMoreEvent>((event, emit) async => _onFetchingNextPage(emit));
+    on<LogoutMainEvent>((event, emit) async => _logout(emit));
   }
 
   final _repo = GetIt.instance<GamesRepository>();
+  final _authRepo = GetIt.instance<IAuthRepository>();
 
   int _page = 1;
   bool hasMorePage = false;
@@ -67,5 +70,10 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   }
 
   static String usedDateFormat = 'yyyy-MM-dd';
+
+  void _logout(Emitter<MainState> emitter) {
+    _authRepo.doSignOut();
+    emitter(LogoutMainState());
+  }
 
 }

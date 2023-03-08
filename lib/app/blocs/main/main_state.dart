@@ -22,3 +22,5 @@ class ErrorLoadingMoreMainState extends LoadedMainState {
   final String? message;
   ErrorLoadingMoreMainState(this.message, List<Results?> games) : super(games);
 }
+
+class LogoutMainState extends MainState {}

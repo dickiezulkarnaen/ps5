@@ -5,12 +5,19 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ps5/app/blocs/main/main_bloc.dart';
 import 'package:ps5/app/blocs/main/main_event.dart';
 import 'package:ps5/app/pages/detail_page.dart';
+import 'package:ps5/app/pages/login_page.dart';
 import 'package:ps5/app/widgets/error_widgets.dart';
+import 'package:ps5/app_routes.dart';
 import 'package:ps5/utils/snack_bar_helper.dart';
 
 import '../blocs/main/main_state.dart';
 
 class MainPage extends StatefulWidget {
+
+  static void route(BuildContext context) {
+    Navigator.popAndPushNamed(context, Pages.main);
+  }
+
   const MainPage({super.key});
 
   @override
@@ -37,12 +44,21 @@ class _MainPageState extends State<MainPage> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('Playstation 5'),
+        actions: [
+          TextButton(
+            onPressed: () => _bloc.add(LogoutMainEvent()),
+            child: const Text('Logout', style: TextStyle(color: Colors.black)),
+          ),
+        ],
       ),
       body: Center(
         child: BlocListener<MainBloc, MainState>(
           listener: (context, state) {
             if (state is ErrorLoadingMoreMainState) {
               _scaffoldKey.currentState?.context.showSnackBar(state.message);
+            }
+            if (state is LogoutMainState) {
+              LoginPage.route(context);
             }
           },
           child: BlocBuilder<MainBloc, MainState>(

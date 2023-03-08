@@ -1,17 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ps5/app/blocs/detail/detail_bloc.dart';
-import 'package:ps5/app/blocs/main/main_bloc.dart';
-import 'package:ps5/app/pages/detail_page.dart';
-import 'package:ps5/app/pages/image_preview_page.dart';
-import 'package:ps5/app/pages/main_page.dart';
+import 'package:get_it/get_it.dart';
+import 'package:ps5/app/data/local/local_database.dart';
+import 'package:ps5/app/data/local/local_database_usecase.dart';
+import 'package:ps5/app_routes.dart';
 
 import 'setup_dependency_injection.dart';
 
-void main() {
-  SetupDependencyInjection.init();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SetupDependencyInjection.init();
+  await LocalDatabase.initialize();
+  await Firebase.initializeApp();
   runApp(const MyApp());
-  //Logging.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -20,17 +21,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final isLoggedIn = LocalDatabase.isLoggedIn();
     return MaterialApp(
       title: 'Playstation 5',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      routes: <String, WidgetBuilder>{
-        '/': (context) => BlocProvider<MainBloc>(create: (context) => MainBloc(), child: const MainPage(),),
-        '/detail' : (context) => BlocProvider<DetailBloc>(create: (context) => DetailBloc(), child:  const DetailPage(),),
-        '/image-preview' : (context) => const ImagePreviewPage(),
-      },
+      initialRoute: isLoggedIn ? Pages.main : Pages.login,
+      routes: AppRoutes.pages,
     );
   }
 }
